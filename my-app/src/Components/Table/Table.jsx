@@ -9,6 +9,11 @@ const Table = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
     return new Date(dateString).toLocaleDateString('ru-RU', options);
   };
 
+
+  const deleteUser = (idToItem) => {
+    setDataUser(prevItems => prevItems.filter(dataUser => dataUser.id !== idToItem))
+  }
+
   return (
     <div className="table-container">
       <h2 className="table-title">Таблица данных</h2>
@@ -19,16 +24,23 @@ const Table = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
             <th>Имя</th>
             <th>Дата</th>
             <th>Возраст</th>
+            <th>Действия</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {dataUser.map((row) => (
+          {
+          dataUser.map((row) => (
             <tr key={row.id}>
               <td>{row.name}</td>
               <td>{formatDate(row.date)}</td>
               <td>{row.age}</td>
+              <td className="delete-btn" onClick={() => deleteUser(row.id)}>Удалить</td>
+              <td className="edit-btn">Изменить</td>
             </tr>
-          ))}
+          ))
+          
+          }
         </tbody>
       </table>
     </div>

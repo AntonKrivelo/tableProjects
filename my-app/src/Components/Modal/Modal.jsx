@@ -17,18 +17,22 @@ const Modal = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
       date,
       age
     }
+    
     setDataUser([...dataUser, newUser]);
        setName('')
        setDate('')
        setAge('')
+       setActiveModal(false)
     }
+
 
   return (
     <div className={activeModal ? 'modal active' : 'modal'} onClick={() => setActiveModal(false)}>
         <div className="modal__content" onClick={e => e.stopPropagation()}>
+            <h2>Введите данные пользователя: </h2>
             <form className="modal__content-form">
-                <input value={name} onChange={e => setName(e.target.value)} type="text" placeholder='Введите имя и фамилию:' required />
-                <input value={date} onChange={e => setDate(e.target.value)} type="date" placeholder='Введите дату:' required/>
+                <input value={name} onChange={e => setName(e.target.value) } type="text" placeholder='Введите имя и фамилию:' required />
+                <input value={date} onChange={e => setDate(e.target.value)} type="date" placeholder='Введите дату:' required />
                 <input value={age} onChange={e => setAge(e.target.value)}  type="text" placeholder='Введите возраст:' required />
                 <button onClick={addUserData} type="submit">Добавить</button>
             </form>

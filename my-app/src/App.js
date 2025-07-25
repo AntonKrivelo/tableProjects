@@ -13,8 +13,6 @@ function App() {
 
   const [activeModal, setActiveModal] = useState()
 
-
-
   return (
     <div className="App">
       <Table 
