@@ -49,8 +49,15 @@
 }
 
 .data-table td:nth-child(3) {
-  text-align: right;
+
   font-family: 'Courier New', monospace;
   font-weight: bold;
   color: #2c3e50;
+}
+
+
+.button-tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0 0 30px 30px;
 }
