@@ -1,7 +1,14 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Table.scss';
 
-const Table = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
+const Table = ({
+  activeModal, 
+  setActiveModal, 
+  dataUser, 
+  setDataUser,
+  activeEditModal,
+  setActiveEditModal
+}) => {
 
 
     const formatDate = (dateString) => {
@@ -30,16 +37,15 @@ const Table = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
         </thead>
         <tbody>
           {
-          dataUser.map((row) => (
-            <tr key={row.id}>
-              <td>{row.name}</td>
-              <td>{formatDate(row.date)}</td>
-              <td>{row.age}</td>
-              <td className="delete-btn" onClick={() => deleteUser(row.id)}>Удалить</td>
-              <td className="edit-btn">Изменить</td>
+          dataUser.map((item) => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{formatDate(item.date)}</td>
+              <td>{item.age}</td>
+              <td className="delete-btn" onClick={() => deleteUser(item.id)}>Удалить</td>
+              <td className="edit-btn" onClick={() => setActiveEditModal(true)}>Изменить</td>
             </tr>
           ))
-          
           }
         </tbody>
       </table>

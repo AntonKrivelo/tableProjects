@@ -9,8 +9,8 @@ const Modal = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
     const [date, setDate] = useState('');
     const [age, setAge] = useState('');
 
-  const addUserData = (e) => {
-    e.preventDefault()
+     const addUserData = (e) => {
+      e.preventDefault()
     const newUser = {
       id: Math.floor(Math.random() * 100),
       name,
@@ -32,8 +32,8 @@ const Modal = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
             <h2>Введите данные пользователя: </h2>
             <form className="modal__content-form">
                 <input value={name} onChange={e => setName(e.target.value) } type="text" placeholder='Введите имя и фамилию:' required />
-                <input value={date} onChange={e => setDate(e.target.value)} type="date" placeholder='Введите дату:' required />
-                <input value={age} onChange={e => setAge(e.target.value)}  type="text" placeholder='Введите возраст:' required />
+                <input value={date} onChange={e => setDate(e.target.value)} type="date" placeholder='Введите дату:' />
+                <input value={age} onChange={e => setAge(e.target.value)}  type="text" placeholder='Введите возраст:' />
                 <button onClick={addUserData} type="submit">Добавить</button>
             </form>
         </div>
