@@ -1,7 +1,7 @@
 import React from 'react'
 import './Table.scss';
 
-const Table = ({activeModal, setActiveModal, dataUser}) => {
+const Table = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
 
 
     const formatDate = (dateString) => {
@@ -26,7 +26,7 @@ const Table = ({activeModal, setActiveModal, dataUser}) => {
             <tr key={row.id}>
               <td>{row.name}</td>
               <td>{formatDate(row.date)}</td>
-              <td>{row.value}</td>
+              <td>{row.age}</td>
             </tr>
           ))}
         </tbody>
