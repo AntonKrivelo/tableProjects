@@ -1,14 +1,8 @@
 import React from 'react'
 import './Table.scss';
 
-const Table = ({activeModal, setActiveModal}) => {
+const Table = ({activeModal, setActiveModal, dataUser}) => {
 
-
-    const dataUser = [
-        {id: 1, name: 'Алексей Иванов', date: '2025-05-15', value: 42},
-        {id: 2, name: 'Мария Петрова', date: '2025-06-20', value: 35},
-        {id: 3, name: 'Иван Сидоров', date: '2025-07-10', value: 27},
-    ]
 
     const formatDate = (dateString) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -24,7 +18,7 @@ const Table = ({activeModal, setActiveModal}) => {
           <tr>
             <th>Имя</th>
             <th>Дата</th>
-            <th>Значение</th>
+            <th>Возраст</th>
           </tr>
         </thead>
         <tbody>
