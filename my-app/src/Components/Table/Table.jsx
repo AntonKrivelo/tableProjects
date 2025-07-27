@@ -1,30 +1,27 @@
-import React,{useState} from 'react'
+import { useState } from 'react';
 import './Table.scss';
+import Modal from '../Modal/Modal';
 
-const Table = ({
-  activeModal, 
-  setActiveModal, 
-  dataUser, 
-  setDataUser,
-  activeEditModal,
-  setActiveEditModal
-}) => {
-
-
-    const formatDate = (dateString) => {
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString('ru-RU', options);
-  };
-
+const Table = ({ data }) => {
+  const [usersData, setUsersData] = useState(data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const deleteUser = (idToItem) => {
-    setDataUser(prevItems => prevItems.filter(dataUser => dataUser.id !== idToItem))
-  }
+    setUsersData((prevItems) => prevItems.filter((usersData) => usersData.id !== idToItem));
+  };
 
   return (
     <div className="table-container">
       <h2 className="table-title">Таблица данных</h2>
-      <button onClick={() => setActiveModal(true)} className="button-tab">Открыть окно для добавления пользователя</button>
+      <button
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+        className="button-tab"
+      >
+        Открыть окно для добавления пользователя
+      </button>
+
       <table className="data-table">
         <thead>
           <tr>
@@ -36,21 +33,24 @@ const Table = ({
           </tr>
         </thead>
         <tbody>
-          {
-          dataUser.map((item) => (
+          {usersData.map((item) => (
             <tr key={item.id}>
               <td>{item.name}</td>
-              <td>{formatDate(item.date)}</td>
+              <td>{item.date}</td>
               <td>{item.age}</td>
-              <td className="delete-btn" onClick={() => deleteUser(item.id)}>Удалить</td>
-              <td className="edit-btn" onClick={() => setActiveEditModal(true)}>Изменить</td>
+              <td className="delete-btn" onClick={() => deleteUser(item.id)}>
+                Удалить
+              </td>
+              <td className="edit-btn" onClick={() => {}}>
+                Изменить
+              </td>
             </tr>
-          ))
-          }
+          ))}
         </tbody>
       </table>
+      {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} userData={data} />}
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

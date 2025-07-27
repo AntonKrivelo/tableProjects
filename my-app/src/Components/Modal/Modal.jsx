@@ -1,44 +1,58 @@
-import React, {useState} from 'react'
+import { useState } from 'react';
 import './Modal.scss';
+import { useForm } from 'react-hook-form';
 
+const Modal = ({ onClose, onSubmit, userData }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-const Modal = ({activeModal, setActiveModal, dataUser, setDataUser}) => {
-
-
-    const [name, setName] = useState('');
-    const [date, setDate] = useState('');
-    const [age, setAge] = useState('');
-
-     const addUserData = (e) => {
-      e.preventDefault()
-    const newUser = {
-      id: Math.floor(Math.random() * 100),
-      name,
-      date,
-      age
-    }
-    
-    setDataUser([...dataUser, newUser]);
-       setName('')
-       setDate('')
-       setAge('')
-       setActiveModal(false)
-    }
-
+  const handleFormSubmit = (userData) => {
+    let id;
+    const result = { ...userData, id };
+    onSubmit(result);
+    onClose();
+  };
 
   return (
-    <div className={activeModal ? 'modal active' : 'modal'} onClick={() => setActiveModal(false)}>
-        <div className="modal__content" onClick={e => e.stopPropagation()}>
-            <h2>Введите данные пользователя: </h2>
-            <form className="modal__content-form">
-                <input value={name} onChange={e => setName(e.target.value) } type="text" placeholder='Введите имя и фамилию:' required />
-                <input value={date} onChange={e => setDate(e.target.value)} type="date" placeholder='Введите дату:' />
-                <input value={age} onChange={e => setAge(e.target.value)}  type="text" placeholder='Введите возраст:' />
-                <button onClick={addUserData} type="submit">Добавить</button>
-            </form>
-        </div>
+    <div>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+        <h2>Введите данные пользователя: </h2>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="modal__content-form">
+          <div>
+            <input
+              {...register('name', { required: 'Введите имя пользователя!' })}
+              type="text"
+              placeholder="Введите имя и фамилию:"
+            />
+            {errors.name && <p>{errors.name.message}</p>}
+          </div>
+          <div>
+            <input
+              {...register('date', { required: 'Введите дату!' })}
+              type="date"
+              placeholder="Введите дату:"
+            />
+            {errors.date && <p>{errors.date.message}</p>}
+          </div>
+          <div>
+            <input
+              {...register('age', { required: 'Введите возраст!' })}
+              type="text"
+              placeholder="Введите возраст:"
+            />
+            {errors.age && <p>{errors.age.message}</p>}
+          </div>
+          <button onClick={onClose} type="button">
+            Отменить
+          </button>
+          <button type="submit">Добавить</button>
+        </form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Modal;
