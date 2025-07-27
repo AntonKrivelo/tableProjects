@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import Table from './Components/Table/Table';
 import './App.css';
-// import Modal from './Components/Modal/Modal';
-// import ModalEdit from './Components/ModalEdit/ModalEdit';
 
 function App() {
   const usersData = [
